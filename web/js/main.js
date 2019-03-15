@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
     data: {
         message: 'I can read your mnind!',
-        symbols: [ ],
+        symbols: '',
         answer: '',
         answerText: '',
         pages: [
@@ -51,38 +51,43 @@ var app = new Vue({
     methods: {
         goToNextPage() {
             this.currentPage++;
+            
             console.log(this.currentPage);
+            
             if (this.currentPage == 4) {
                 app.createSymbols();
             }
             if (this.currentPage == 5) {
                 this.disableNext = true;
                 this.showSymbols = false;
+                this.showAnswer = true;
             }
         },
         createSymbols() {
             let arrSymbol = app.shuffleArray(["&", "^", "%", "$", "#", "@", "!", "*", "?"]);
             var str = "";
+            
             console.log(arrSymbol);
 
             var k = 0;
             for (let i = 0; i <= 10; i++) {
                 for (let j = 0; j < arrSymbol.length; j++) {
 
-                    this.symbols.push(k + " - " + arrSymbol[j]);
+                    str += "<div class='row'>" + k + " - " + arrSymbol[j] + "</div>";
                     k++;
                 }
             }
-            console.log(this.symbols);
+            str += "<div class='row'>" + k + " - " + arrSymbol[0] + "</div>";
+            
+            this.symbols = str;
             this.showSymbols = true;
-            console.log(this.symbols[0]);
-            //still need to add 99 on to it and return it better
-            // str += "<div class='row'>" + k + " - " + arrSymbol[0] + "</div>";
 
-            //still need to display the below for the title and p of pageId 6
             this.answer =  arrSymbol[0];
-            console.log(this.answer);
             this.answerText = "Your symbol is " + arrSymbol[0];
+            
+            console.log(this.symbols);
+            console.log(this.symbols[0]);
+            console.log(this.answer);
             console.log(this.answerText);
         },
         shuffleArray(array) {

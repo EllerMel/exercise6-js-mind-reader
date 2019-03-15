@@ -13,18 +13,22 @@
   </head>
 <body>
     <div id="app">
-        <div :key="currentPage">
-            <h1>{{pages[currentPage].pageTitle}}</h1>
-        
-            <p v-show="showSymbols">{{symbols}}</p>
-        
-            <p>{{pages[currentPage].pageP1}}</p>
-            <p>{{pages[currentPage].pageP2}}</p>
-        
+      <div :key="currentPage">
+        <h1>{{pages[currentPage].pageTitle}}</h1>
+    
+        <div v-show="showSymbols" v-html="symbols" class="large"></div>
+    
+        <div v-show="showAnswer">
+          <h1>{{answer}}</p>
+          <p>{{answerText}}</p>
         </div>
+    
+        <p>{{pages[currentPage].pageP1}}</p>
+        <p>{{pages[currentPage].pageP2}}</p>
+    
         <button class="btn btn-info fas fa-arrow-right" v-on:click="goToNextPage()" :disabled="disableNext"></button>
         <button class="btn btn-info fas fa-redo-alt" onclick="location.reload()"></button>
-
+      </div>
     </div>
 
     <!-- development version, includes helpful console warnings -->
